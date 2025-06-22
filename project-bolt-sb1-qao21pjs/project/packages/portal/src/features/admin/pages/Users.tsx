@@ -85,7 +85,7 @@ const Users: React.FC = () => {
     }
   };
 
-  const getStatusColor = (status: string) => {
+  const getStatusColor = (status: string): 'default' | 'secondary' | 'success' | 'warning' | 'error' => {
     return status === 'active' ? 'success' : 'secondary';
   };
 
@@ -204,7 +204,7 @@ const Users: React.FC = () => {
                       </Badge>
                     </td>
                     <td className="py-3 px-4">
-                      <Badge variant={getStatusColor(user.status) as any}>
+                      <Badge variant={getStatusColor(user.status)}>
                         {user.status}
                       </Badge>
                     </td>

@@ -1,6 +1,6 @@
 import React from 'react';
 import { Card, CardContent, CardHeader, CardTitle } from '@hind-lms/design-system';
-import { BarChart3, TrendingUp, Users, BookOpen, GraduationCap, Clock } from 'lucide-react';
+import { BarChart3, TrendingUp, Users, GraduationCap, Clock } from 'lucide-react';
 
 const Analytics: React.FC = () => {
   return (

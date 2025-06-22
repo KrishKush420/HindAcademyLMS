@@ -78,7 +78,7 @@ const Courses: React.FC = () => {
 
   const departments = ['All', 'Mathematics', 'Computer Science', 'English', 'Physics', 'Chemistry'];
 
-  const getStatusColor = (status: string) => {
+  const getStatusColor = (status: string): 'default' | 'secondary' | 'success' | 'warning' | 'error' => {
     switch (status) {
       case 'active': return 'success';
       case 'draft': return 'warning';
@@ -207,7 +207,7 @@ const Courses: React.FC = () => {
                     <p className="text-sm text-gray-600">{course.code} • {course.department}</p>
                   </div>
                   <div className="flex items-center space-x-2">
-                    <Badge variant={getStatusColor(course.status) as any}>
+                    <Badge variant={getStatusColor(course.status)}>
                       {course.status}
                     </Badge>
                     <button className="p-2 text-gray-400 hover:text-gray-600">

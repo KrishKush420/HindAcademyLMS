@@ -1,6 +1,6 @@
 import React from 'react';
 import { Routes, Route, Navigate } from 'react-router-dom';
-import { useAuth } from '@/features/auth/AuthProvider';
+import { useAuth } from '@/features/auth/AuthContext';
 
 // Lazy load role-specific routes
 const StudentRoutes = React.lazy(() => import('./student/StudentRoutes'));

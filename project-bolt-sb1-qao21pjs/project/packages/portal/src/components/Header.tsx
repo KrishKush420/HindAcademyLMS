@@ -1,7 +1,7 @@
 import React from 'react';
 import { Bell, Search, LogOut } from 'lucide-react';
 import { Button, Avatar } from '@hind-lms/design-system';
-import { useAuth } from '@/features/auth/AuthProvider';
+import { useAuth } from '@/features/auth/AuthContext';
 
 const Header: React.FC = () => {
   const { user, logout } = useAuth();
