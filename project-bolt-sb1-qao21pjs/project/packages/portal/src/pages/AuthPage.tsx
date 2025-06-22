@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { Button, Card, CardContent, CardHeader, CardTitle, Input, useToast } from '@hind-lms/design-system';
-import { useAuth } from '@/features/auth/AuthProvider';
+import { useAuth } from '@/features/auth/AuthContext';
 import { GraduationCap } from 'lucide-react';
 
 const AuthPage: React.FC = () => {

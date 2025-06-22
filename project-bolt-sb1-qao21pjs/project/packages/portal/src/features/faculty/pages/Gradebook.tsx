@@ -2,12 +2,24 @@ import React, { useState } from 'react';
 import { Card, CardContent, CardHeader, CardTitle, Badge } from '@hind-lms/design-system';
 import { Filter, Download, Plus } from 'lucide-react';
 
+interface Assignment {
+  grade: number | null;
+  maxPoints: number;
+  submitted: boolean;
+}
+
+interface Student {
+  id: number;
+  name: string;
+  assignments: Record<string, Assignment>;
+}
+
 const Gradebook: React.FC = () => {
   const [selectedCourse, setSelectedCourse] = useState('Advanced Mathematics');
 
   const courses = ['Advanced Mathematics', 'Calculus I', 'Statistics', 'Linear Algebra'];
 
-  const students = [
+  const students: Student[] = [
     {
       id: 1,
       name: 'Alice Johnson',
@@ -62,12 +74,14 @@ const Gradebook: React.FC = () => {
 
   const assignmentNames = Object.keys(students[0].assignments);
 
-  const calculateAverage = (student: any) => {
+  const calculateAverage = (student: Student) => {
     const grades = Object.values(student.assignments)
-      .filter((assignment: any) => assignment.grade !== null)
-      .map((assignment: any) => (assignment.grade / assignment.maxPoints) * 100);
+      .filter((assignment) => assignment.grade !== null)
+      .map((assignment) => ((assignment.grade as number) / assignment.maxPoints) * 100);
     
-    return grades.length > 0 ? (grades.reduce((sum: number, grade: number) => sum + grade, 0) / grades.length).toFixed(1) : 'N/A';
+    return grades.length > 0
+      ? (grades.reduce((sum: number, grade: number) => sum + grade, 0) / grades.length).toFixed(1)
+      : 'N/A';
   };
 
   const getGradeColor = (percentage: number) => {

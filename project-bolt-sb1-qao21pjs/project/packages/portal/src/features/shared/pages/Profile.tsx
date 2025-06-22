@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { Card, CardContent, CardHeader, CardTitle, Button, Input, Avatar } from '@hind-lms/design-system';
-import { useAuth } from '@/features/auth/AuthProvider';
+import { useAuth } from '@/features/auth/AuthContext';
 import { Camera, Save, Lock } from 'lucide-react';
 
 const Profile: React.FC = () => {

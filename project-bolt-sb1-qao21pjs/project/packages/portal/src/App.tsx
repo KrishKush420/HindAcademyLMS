@@ -1,6 +1,6 @@
 import React from 'react';
 import { Routes, Route, Navigate } from 'react-router-dom';
-import { useAuth } from '@/features/auth/AuthProvider';
+import { useAuth } from '@/features/auth/AuthContext';
 import AuthPage from '@/pages/AuthPage';
 import AppRouter from '@/routes/AppRouter';
 import { Spinner } from '@hind-lms/design-system';

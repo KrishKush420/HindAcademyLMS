@@ -46,7 +46,7 @@ const Assignments: React.FC = () => {
     },
   ];
 
-  const getStatusColor = (status: string) => {
+  const getStatusColor = (status: string): 'default' | 'secondary' | 'success' | 'warning' | 'error' => {
     switch (status) {
       case 'pending': return 'warning';
       case 'in-progress': return 'default';
@@ -150,7 +150,7 @@ const Assignments: React.FC = () => {
               <div className="flex items-center justify-between">
                 <CardTitle className="text-lg">{assignment.title}</CardTitle>
                 <div className="flex items-center space-x-2">
-                  <Badge variant={getStatusColor(assignment.status) as any}>
+                  <Badge variant={getStatusColor(assignment.status)}>
                     {assignment.status.replace('-', ' ')}
                   </Badge>
                   <span className={`text-sm font-medium ${getPriorityColor(assignment.priority)}`}>

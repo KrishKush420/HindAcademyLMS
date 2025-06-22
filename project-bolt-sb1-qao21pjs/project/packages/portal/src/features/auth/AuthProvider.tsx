@@ -1,41 +1,17 @@
-import React, { createContext, useContext, useEffect, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import {
   CognitoUserPool,
   CognitoUser,
   AuthenticationDetails,
   CognitoUserSession,
 } from 'amazon-cognito-identity-js';
+import { AuthContext, AuthContextType, User } from './AuthContext';
 
 const pool = new CognitoUserPool({
   UserPoolId: import.meta.env.VITE_COGNITO_USER_POOL_ID || 'us-east-1_EXAMPLE',
   ClientId: import.meta.env.VITE_COGNITO_CLIENT_ID || 'example-client-id',
 });
 
-export interface User {
-  id: string;
-  email: string;
-  role: 'student' | 'faculty' | 'admin';
-  name?: string;
-  avatar?: string;
-}
-
-interface AuthContextType {
-  user: User | null;
-  loading: boolean;
-  login: (email: string, password: string) => Promise<void>;
-  logout: () => void;
-  refreshToken: () => Promise<void>;
-}
-
-const AuthContext = createContext<AuthContextType | null>(null);
-
-export const useAuth = () => {
-  const context = useContext(AuthContext);
-  if (!context) {
-    throw new Error('useAuth must be used within an AuthProvider');
-  }
-  return context;
-};
 
 export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children }) => {
   const [user, setUser] = useState<User | null>(null);
@@ -107,7 +83,7 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
         onFailure: (err) => {
           reject(err);
         },
-        newPasswordRequired: (userAttributes, requiredAttributes) => {
+        newPasswordRequired: () => {
           // Handle new password required scenario
           reject(new Error('New password required'));
         },
@@ -140,7 +116,7 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
         
         if (session) {
           const refreshToken = session.getRefreshToken();
-          currentUser.refreshSession(refreshToken, (refreshErr, newSession) => {
+          currentUser.refreshSession(refreshToken, (refreshErr) => {
             if (refreshErr) {
               reject(refreshErr);
             } else {
